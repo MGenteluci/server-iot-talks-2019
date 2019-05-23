@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: 'iot-talks-2019',
+    name: 'server-iot-talks-2019',
     script: './bin/www'
   }],
   deploy: {
