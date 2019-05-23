@@ -10,7 +10,7 @@ module.exports = {
       key: '~/.ssh/iot-talks-2019.pem',
       ref: 'origin/master',
       repo: 'git@github.com:MGenteluci/server-iot-talks-2019.git',
-      path: '/home/ubuntu/server',
+      path: '/home/ubuntu/server-iot-talks-2019',
       'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
     }
   }
