@@ -1,7 +1,7 @@
 module.exports = {
   apps: [{
     name: 'iot-talks-2019',
-    script: './index.js'
+    script: './bin/www'
   }],
   deploy: {
     production: {
