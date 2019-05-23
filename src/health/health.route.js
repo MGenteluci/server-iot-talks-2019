@@ -1,5 +1,6 @@
 const router = require('express').Router();
+const healthController = require('./health.controller');
 
-router.get('/', (req, res) => res.status(200).json({ status: 'Up!' }));
+router.get('/', healthController.findStatus);
 
 module.exports = router;
