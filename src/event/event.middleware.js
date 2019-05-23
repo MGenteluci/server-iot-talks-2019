@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-module.exports = (req, res, next) => {
+exports.validatePayload = (req, res, next) => {
   if (!req.body.startDate)
     return res.status(400).json({ message: 'missing startDate' });
 
@@ -26,4 +26,20 @@ module.exports = (req, res, next) => {
     return res.status(400).json({ message: 'endDate is not a valid Date' });
 
   return next();
+};
+
+exports.validateDate = (req, res, next) => {
+  try {
+    const date = req.params.date;
+
+    if (!moment(date).isValid())
+      return res.status(400).json({ message: `[${date}] is not a valid Date` });
+
+    if (moment(date).isAfter(moment()))
+      return res.status(400).json({ message: `Date must not be after today` });
+
+    return next();
+  } catch (err) {
+    return res.status(400).json({ message: `[${date}] is not a valid Date` });
+  }
 };

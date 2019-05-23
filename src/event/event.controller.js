@@ -1,4 +1,4 @@
-const eventRepository = require('../repository/event');
+const eventRepository = require('./event.repository');
 
 const save = async(req, res) => {
   const event = req.body;
