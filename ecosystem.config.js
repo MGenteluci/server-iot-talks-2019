@@ -1,7 +1,11 @@
 module.exports = {
   apps: [{
     name: 'server-iot-talks-2019',
-    script: './bin/www'
+    script: './bin/www',
+    env: {
+      NODE_ENV: 'production',
+      MONGO_URL: 'mongodb+srv://admin:admin@cluster0-5msyk.mongodb.net/iot-talks-2019?retryWrites=true'
+    }
   }],
   deploy: {
     production: {
