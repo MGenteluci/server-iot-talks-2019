@@ -4,6 +4,7 @@ const cors = require('cors');
 require('./src/config/database')();
 const eventsRoute = require('./src/event/event.route');
 const healthRoute = require('./src/health/health.route');
+const usersRoute = require('./src/user/user.route');
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/events', eventsRoute);
 app.use('/health', healthRoute);
+app.use('/users', usersRoute);
 
 app.use((req, res) => res.status(404).json({ message: 'Resource not found' }));
 
