@@ -4,7 +4,7 @@ const eventSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   startDate: Date,
   endDate: Date,
-  openArchTime: String,
+  openArchTime: Number,
   machine: String,
   voltage: Number,
   current: Number
