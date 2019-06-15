@@ -1,3 +1,9 @@
-.vscode
+# Node.js
 node_modules
+package-lock.json
+
+# IDE
+.vscode
+
+# Env
 .env
