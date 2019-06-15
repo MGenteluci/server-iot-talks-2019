@@ -4,12 +4,11 @@ const Event = require('./event.model');
 const create = async event => {
   await Event.create({
     _id: mongoose.Types.ObjectId(),
-    startDate: event.startDate,
-    endDate: event.endDate,
-	  openArchTime: event.openArchTime,
-	  machine: event.machine,
-	  current: event.current,
-	  voltage: event.voltage
+    data: event.data,
+    tempoArcoAberto: event.tempoArcoAberto,
+    corrente: event.corrente,
+    tensao: event.tensao,
+    potencia: event.potencia
   });
 };
 

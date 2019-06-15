@@ -1,32 +1,18 @@
 const moment = require('moment');
+const Joi = require('@hapi/joi');
+
+const eventSchema = Joi.object().keys({
+  data: Joi.date().less('now').iso().required(),
+  tempoArcoAberto: Joi.number().required(),
+  corrente: Joi.number().required(),
+  tensao: Joi.number().valid(110, 220).required(),
+  potencia: Joi.number().required()
+});
 
 exports.validatePayload = (req, res, next) => {
-  if (!req.body.startDate)
-    return res.status(400).json({ error: 'missing startDate' });
+  const { error } = Joi.validate(req.body, eventSchema);
 
-  if (!req.body.endDate)
-    return res.status(400).json({ error: 'missing endDate' });
-
-  if (!req.body.openArchTime)
-    return res.status(400).json({ error: 'missing openArchTime' });
-
-  if (!req.body.machine)
-    return res.status(400).json({ error: 'missing machine' });
-
-  if (!req.body.voltage)
-    return res.status(400).json({ error: 'missing voltage' });
-
-  if (!req.body.current)
-    return res.status(400).json({ error: 'missing current' });
-
-  if (!moment(req.body.startDate).isValid())
-    return res.status(400).json({ error: 'startDate is not a valid Date' });
-
-  if (!moment(req.body.endDate).isValid())
-    return res.status(400).json({ error: 'endDate is not a valid Date' });
-
-  if (moment(req.body.startDate).isAfter(req.body.endDate))
-    return res.status(400).json({ error: 'startDate must be before endDate' });
+  if (error) return res.status(400).json(error);
 
   return next();
 };
