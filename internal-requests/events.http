@@ -1,0 +1,2 @@
+GET http://localhost:3000/events/2019-06-12
+Content-Type: application/json

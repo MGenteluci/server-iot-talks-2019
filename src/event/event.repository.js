@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Event = require('./event.model');
+const moment = require('moment');w
 
 const create = async event => {
   await Event.create({
@@ -14,8 +15,10 @@ const create = async event => {
 
 const find = async date => {
   return await Event.find({
-    startDate: { $lt : date },
-    endDate: { $gte: date }
+    data: {
+      $lt : moment(date).utcOffset(0).set({ hour: 23, minute: 59, second: 59, millisecond: 59 }).toDate(),
+      $gte: moment(date).utcOffset(0).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).toDate()
+    },
   });
 };
 

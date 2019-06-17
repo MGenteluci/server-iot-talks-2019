@@ -1,4 +1,5 @@
 const eventRepository = require('./event.repository');
+const BigNumber = require('bignumber.js');
 
 const save = async(req, res) => {
   const event = req.body;
@@ -21,7 +22,20 @@ const find = async(req, res) => {
     if (events.length === 0)
       return res.status(404).json({ message: `No events found for day: ${date}` });
 
-    return res.status(200).json(events);
+    const relatory = {
+      tempoArcoAberto: 0,
+      consumoDiario: 0
+    };
+
+    events.map(event => {
+      relatory.tempoArcoAberto += event.tempoArcoAberto;
+      relatory.consumoDiario += event.potencia;
+    });
+
+    relatory.tempoArcoAberto = new BigNumber(relatory.tempoArcoAberto).dividedBy(60).toFixed(1);
+    relatory.consumoDiario = new BigNumber(relatory.consumoDiario).dividedBy(1000).toFixed(1);
+
+    return res.status(200).json(relatory);
   } catch (err) {
     return res.status(500).json({ error: 'Failed reading events from database' });
   }
