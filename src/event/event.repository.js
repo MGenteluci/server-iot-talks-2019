@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Event = require('./event.model');
-const moment = require('moment');w
+const moment = require('moment');
 
 const create = async event => {
   await Event.create({
